@@ -20,7 +20,7 @@ public class GetPricingTests : IClassFixture<WebAppFixture>
     {
         var result = await _host.Scenario(api =>
         {
-            api.Get.Url("/pricing");
+            api.Get.Url("/pricing"); // note.
             api.StatusCodeShouldBeOk();
         });
 
