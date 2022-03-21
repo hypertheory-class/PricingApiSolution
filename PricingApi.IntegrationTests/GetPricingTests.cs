@@ -24,9 +24,11 @@ public class GetPricingTests : IClassFixture<WebAppFixture>
             api.StatusCodeShouldBeOk();
         });
 
-        var actual = result.ReadAsJson<CurrentPricingResponse>();
-        var expected = new CurrentPricingResponse(58, 10, 35, 40);
+        var actual = result.ReadAsJson<Response>();
+        var expected = new CurrentPricingResponse(60, 10, 35, 20);
 
-        Assert.Equal(expected, actual);
+        Assert.Equal(expected, actual?.data);
     }
 }
+
+public record Response(CurrentPricingResponse data);

@@ -18,13 +18,13 @@ public class PricingController : ControllerBase
     [HttpGet("/pricing")]
     public async Task<ActionResult> GetCurrentPricingAsync()
     {
-        var response = new CurrentPricingResponse(58, 10, 35, 40);
+        var response = new CurrentPricingResponse(60, 10, 35, 20);
         _logger.LogInformation("Got a request for the current pricing " + response);
-        return Ok(response); // Return a 200 response.
+        return Ok(new { data = response }); // Return a 200 response.
     }
 
 }
 
 
 
-public record CurrentPricingResponse(decimal baseAmount, decimal waterDaily, decimal electicalDaily, decimal lakeFrontDaily);
+public record CurrentPricingResponse(decimal baseAmount, decimal waterDaily, decimal electricalDaily, decimal lakeFrontDaily);
