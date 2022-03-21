@@ -1,6 +1,7 @@
 ﻿
 using System.Threading.Tasks;
 using Alba;
+using PricingApi.Controllers;
 using Xunit;
 
 namespace PricingApi.IntegrationTests;
@@ -17,11 +18,15 @@ public class GetPricingTests : IClassFixture<WebAppFixture>
     [Fact]
     public async Task CanGetThePricingInformation()
     {
-        await _host.Scenario(api =>
+        var result = await _host.Scenario(api =>
         {
             api.Get.Url("/pricing");
             api.StatusCodeShouldBeOk();
         });
 
+        var actual = result.ReadAsJson<CurrentPricingResponse>();
+        var expected = new CurrentPricingResponse(58, 10, 35, 40);
+
+        Assert.Equal(expected, actual);
     }
 }
